@@ -424,10 +424,10 @@ Mtx44& Mtx44::Perspective(float fovy, float aspect, float n, float f)
 NW_G3D_MATH_INLINE
 Mtx44& Mtx44::Ortho(float l, float r, float b, float t, float n, float f)
 {
-    register float tmp1     =  Math::Rcp(r - l);
-    register float tmp2     =  Math::Rcp(t - b);
-    register float tmp3     =  Math::Rcp(f - n);
-    register float m00, m03, m11, m13, m22, m23;
+    float tmp1     =  Math::Rcp(r - l);
+    float tmp2     =  Math::Rcp(t - b);
+    float tmp3     =  Math::Rcp(f - n);
+    float m00, m03, m11, m13, m22, m23;
 
     m00 =  2.0f * tmp1;
     m03 = -(r + l) * tmp1;
