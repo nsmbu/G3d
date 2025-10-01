@@ -134,8 +134,10 @@ typedef u64 bit64;
 typedef unsigned int uint;
 
 #include <stdint.h>
+#ifndef DISABLE_S
 #include <ppc_ghs.h>
 #include <ppc_ps.h>
+#endif // DISABLE_PS
 #else
 
 #endif // NW_G3D_DEFS_H_
