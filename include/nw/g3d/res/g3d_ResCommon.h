@@ -79,10 +79,10 @@ public:
     const void* to_ptr() const { return to_ptr<void>(); }
 
     template<typename T>
-    T* to_ptr() { return (offset == 0) ? NULL : AddOffset<T>(this, offset); }
+    T* to_ptr() { return (offset == 0) ? NULL : AddOffset<T>(this, static_cast<size_t>(offset)); }
 
     template<typename T>
-    const T* to_ptr() const { return (offset == 0) ? NULL : AddOffset<T>(this, offset); }
+    const T* to_ptr() const { return (offset == 0) ? NULL : AddOffset<T>(this, static_cast<size_t>(offset)); }
 
     Offset* to_table_ptr() { return static_cast<Offset*>(to_ptr()); }
 
@@ -101,7 +101,7 @@ public:
     const ResName* GetResName() const
     {
         return offset == 0 ? NULL : ResName::ResCast(
-            AddOffset<ResNameData>(this, offset - sizeof(ResName::LengthType)));
+            AddOffset<ResNameData>(this, static_cast<size_t>(offset) - sizeof(ResName::LengthType)));
     }
 };
 

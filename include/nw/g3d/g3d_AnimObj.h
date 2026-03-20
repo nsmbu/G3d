@@ -143,8 +143,8 @@ public:
         NW_G3D_ASSERT_INDEX_BOUNDS(targetIndex, m_NumTarget);
         m_pBindArray[animIndex] &= ~(INDEX_MASK | FLAG_MASK);
         m_pBindArray[animIndex] |= (targetIndex & INDEX_MASK);
-        m_pBindArray[targetIndex] &= ~REVERSE_INDEX_MASK;
-        m_pBindArray[targetIndex] |= (animIndex & INDEX_MASK) << REVERSE_SHIFT;
+        m_pBindArray[targetIndex] &= ~static_cast<bit32>(REVERSE_INDEX_MASK);
+        m_pBindArray[targetIndex] |= static_cast<bit32>((animIndex & INDEX_MASK) << REVERSE_SHIFT);
     }
 
     void Unbind(int animIndex, int targetIndex)
@@ -152,7 +152,7 @@ public:
         NW_G3D_ASSERT_INDEX_BOUNDS(animIndex, m_NumAnim);
         NW_G3D_ASSERT_INDEX_BOUNDS(targetIndex, m_NumTarget);
         NW_G3D_ASSERT(targetIndex == GetTargetIndex(animIndex));
-        m_pBindArray[animIndex] |= (NOT_BOUND | FLAG_DISABLED);
+        m_pBindArray[animIndex] |= static_cast<bit32>(NOT_BOUND | FLAG_DISABLED);
         m_pBindArray[targetIndex] |= REVERSE_NOT_BOUND;
     }
 

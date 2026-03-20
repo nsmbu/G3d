@@ -283,7 +283,7 @@ public:
     u32 GetDivisor(int divisorIndex) const
     {
         NW_G3D_ASSERT_INDEX_BOUNDS(divisorIndex, 4);
-        return divisorIndex < 2 ? divisorIndex : gx2FetchShader._divisors[divisorIndex - 2];
+        return divisorIndex < 2 ? static_cast<u32>(divisorIndex) : gx2FetchShader._divisors[divisorIndex - 2];
     }
 
     void SetVertexBuffer(int attribIndex, const GfxBuffer* pBuffer);

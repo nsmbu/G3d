@@ -96,7 +96,7 @@ public:
 
     size_t CalcLCSize() const
     {
-        return Align(sizeof(BoneAnimResult) * GetBindTable().GetAnimCount(), LL_CACHE_FETCH_SIZE);
+        return Align(sizeof(BoneAnimResult) * static_cast<size_t>(GetBindTable().GetAnimCount()), LL_CACHE_FETCH_SIZE);
     }
 
     size_t LCMount(void* pLC, size_t size, bool load);
@@ -290,13 +290,13 @@ public:
 
     int GetMaxBoneCount() const { return m_MaxBone; }
 
-    void SetBlendMode(BlendMode mode) { m_Flag = (m_Flag & ~BLEND_MASK) | mode; }
+    void SetBlendMode(BlendMode mode) { m_Flag = (m_Flag & ~static_cast<bit32>(BLEND_MASK)) | mode; }
 
     BlendMode GetBlendMode() const { return BlendMode(m_Flag & BLEND_MASK); }
 
     void EnableSlerp() { m_Flag |= USE_SLERP; }
 
-    void DisableSlerp() { m_Flag &= ~USE_SLERP; }
+    void DisableSlerp() { m_Flag &= ~static_cast<bit32>(USE_SLERP); }
 
     bool IsSlerpEnabled() const { return 0 != (m_Flag & USE_SLERP); }
 

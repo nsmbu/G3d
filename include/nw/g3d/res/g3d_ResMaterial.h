@@ -159,7 +159,7 @@ public:
 
     void SetMode(Mode mode)
     {
-        ref().flag = (ref().flag & ~MODE_MASK) | (mode << MODE_SHIFT);
+        ref().flag = (ref().flag & ~static_cast<bit32>(MODE_MASK)) | static_cast<bit32>(mode << MODE_SHIFT);
     }
 
     BlendMode GetBlendMode() const
@@ -169,7 +169,7 @@ public:
 
     void SetBlendMode(BlendMode mode)
     {
-        ref().flag = (ref().flag & ~BLEND_MASK) | (mode << BLEND_SHIFT);
+        ref().flag = (ref().flag & ~static_cast<bit32>(BLEND_MASK)) | static_cast<bit32>(mode << BLEND_SHIFT);
     }
 
     GfxPolygonCtrl& GetPolygonCtrl()
@@ -443,12 +443,12 @@ public:
 
     void* GetSrcParam(int paramIndex)
     {
-        return AddOffset(ref().ofsSrcParam.to_ptr(), GetShaderParam(paramIndex)->GetSrcOffset());
+        return AddOffset(ref().ofsSrcParam.to_ptr(), static_cast<size_t>(GetShaderParam(paramIndex)->GetSrcOffset()));
     }
 
     const void* GetSrcParam(int paramIndex) const
     {
-        return AddOffset(ref().ofsSrcParam.to_ptr(), GetShaderParam(paramIndex)->GetSrcOffset());
+        return AddOffset(ref().ofsSrcParam.to_ptr(), static_cast<size_t>(GetShaderParam(paramIndex)->GetSrcOffset()));
     }
 
     template <typename T>

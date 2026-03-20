@@ -137,7 +137,7 @@ void Copy32(void* pDst, const void* pSrc, int count)
     else
 #endif
     {
-        memcpy(pDst, pSrc, sizeof(bit32) * count);
+        memcpy(pDst, pSrc, sizeof(bit32) * static_cast<size_t>(count));
     }
 }
 
@@ -276,7 +276,7 @@ int CountOnes(bit32 x)
     x = (x & 0x0F0F0F0F) + (x >>  4 & 0x0F0F0F0F);
     x = (x & 0x00FF00FF) + (x >>  8 & 0x00FF00FF);
     x = (x & 0x0000FFFF) + (x >> 16 & 0x0000FFFF);
-    return x;
+    return static_cast<int>(x);
 }
 
 NW_G3D_FORCE_INLINE

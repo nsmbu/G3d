@@ -33,7 +33,7 @@ public:
     NW_G3D_FORCE_INLINE void* GetPtr(void* ptr, int type) const
     {
         NW_G3D_ASSERT_NOT_NULL(pChunk);
-        return pChunk[type].size ? AddOffset(ptr, pChunk[type].offset) : NULL;
+        return pChunk[type].size ? AddOffset(ptr, static_cast<size_t>(pChunk[type].offset)) : NULL;
     }
 
 protected:
@@ -44,9 +44,9 @@ protected:
         for (; idx < count - 1; ++idx)
         {
             NW_G3D_ASSERT(IsAligned(pChunk[idx].size));
-            pChunk[idx + 1].offset = pChunk[idx].offset + pChunk[idx].size;
+            pChunk[idx + 1].offset = pChunk[idx].offset + static_cast<ptrdiff_t>(pChunk[idx].size);
         }
-        totalSize = pChunk[idx].offset + pChunk[idx].size;
+        totalSize = static_cast<size_t>(pChunk[idx].offset) + pChunk[idx].size;
         this->pChunk = pChunk;
     }
 
