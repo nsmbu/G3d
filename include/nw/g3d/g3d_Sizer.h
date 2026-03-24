@@ -37,17 +37,17 @@ public:
     }
 
 protected:
-    void CalcOffset(Chunk* pChunk, int count)
+    void CalcOffset(Chunk* chunk, int count)
     {
         int idx = 0;
-        pChunk[idx].offset = 0;
+        chunk[idx].offset = 0;
         for (; idx < count - 1; ++idx)
         {
-            NW_G3D_ASSERT(IsAligned(pChunk[idx].size));
-            pChunk[idx + 1].offset = pChunk[idx].offset + static_cast<ptrdiff_t>(pChunk[idx].size);
+            NW_G3D_ASSERT(IsAligned(chunk[idx].size));
+            chunk[idx + 1].offset = chunk[idx].offset + static_cast<ptrdiff_t>(chunk[idx].size);
         }
-        totalSize = static_cast<size_t>(pChunk[idx].offset) + pChunk[idx].size;
-        this->pChunk = pChunk;
+        totalSize = static_cast<size_t>(chunk[idx].offset) + chunk[idx].size;
+        pChunk = chunk;
     }
 
 private:
